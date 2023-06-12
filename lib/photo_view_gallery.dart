@@ -104,6 +104,8 @@ class PhotoViewGallery extends StatefulWidget {
   const PhotoViewGallery({
     Key? key,
     required this.pageOptions,
+    this.onScaleUpdate,
+    this.onScaleStart,
     this.loadingBuilder,
     this.backgroundDecoration,
     this.wantKeepAlive = false,
@@ -128,6 +130,8 @@ class PhotoViewGallery extends StatefulWidget {
     Key? key,
     required this.itemCount,
     required this.builder,
+    this.onScaleUpdate,
+    this.onScaleStart,
     this.loadingBuilder,
     this.backgroundDecoration,
     this.wantKeepAlive = false,
@@ -195,6 +199,9 @@ class PhotoViewGallery extends StatefulWidget {
   final bool allowImplicitScrolling;
 
   bool get _isBuilder => builder != null;
+
+  final Function(ScaleUpdateDetails details)? onScaleUpdate;
+  final Function(ScaleStartDetails details)? onScaleStart;
 
   @override
   State<StatefulWidget> createState() {
@@ -270,6 +277,8 @@ class _PhotoViewGalleryState extends State<PhotoViewGallery> {
             filterQuality: pageOption.filterQuality,
             basePosition: pageOption.basePosition,
             disableGestures: pageOption.disableGestures,
+            onScaleUpdate: widget.onScaleUpdate,
+            onScaleStart: widget.onScaleStart,
           )
         : PhotoView(
             key: ObjectKey(index),
@@ -297,6 +306,8 @@ class _PhotoViewGalleryState extends State<PhotoViewGallery> {
             basePosition: pageOption.basePosition,
             disableGestures: pageOption.disableGestures,
             errorBuilder: pageOption.errorBuilder,
+            onScaleUpdate: widget.onScaleUpdate,
+            onScaleStart: widget.onScaleStart,
           );
 
     return ClipRect(

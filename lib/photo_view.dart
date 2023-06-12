@@ -235,6 +235,8 @@ class PhotoView extends StatefulWidget {
   PhotoView({
     Key? key,
     required this.imageProvider,
+    this.onScaleUpdate,
+    this.onScaleStart,
     this.loadingBuilder,
     this.backgroundDecoration,
     this.wantKeepAlive = false,
@@ -294,6 +296,8 @@ class PhotoView extends StatefulWidget {
     this.filterQuality,
     this.disableGestures,
     this.enablePanAlways,
+    this.onScaleUpdate,
+    this.onScaleStart,
   })  : errorBuilder = null,
         imageProvider = null,
         gaplessPlayback = false,
@@ -400,6 +404,9 @@ class PhotoView extends StatefulWidget {
   /// Enable pan the widget even if it's smaller than the hole parent widget.
   /// Useful when you want to drag a widget without restrictions.
   final bool? enablePanAlways;
+
+  final Function(ScaleUpdateDetails details)? onScaleUpdate;
+  final Function(ScaleStartDetails details)? onScaleStart;
 
   bool get _isCustomChild {
     return child != null;
@@ -521,6 +528,8 @@ class _PhotoViewState extends State<PhotoView>
                 filterQuality: widget.filterQuality,
                 disableGestures: widget.disableGestures,
                 enablePanAlways: widget.enablePanAlways,
+                onScaleUpdate: widget.onScaleUpdate,
+                onScaleStart: widget.onScaleStart,
               )
             : ImageWrapper(
                 imageProvider: widget.imageProvider!,
@@ -547,6 +556,8 @@ class _PhotoViewState extends State<PhotoView>
                 disableGestures: widget.disableGestures,
                 errorBuilder: widget.errorBuilder,
                 enablePanAlways: widget.enablePanAlways,
+                onScaleUpdate: widget.onScaleUpdate,
+                onScaleStart: widget.onScaleStart,
               );
       },
     );

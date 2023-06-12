@@ -29,6 +29,7 @@ class InlineExample extends StatelessWidget {
                 maxScale: PhotoViewComputedScale.covered * 2.0,
                 minScale: PhotoViewComputedScale.contained * 0.8,
                 initialScale: PhotoViewComputedScale.covered,
+                onScaleUpdate: (details) {},
               ),
             ),
           )

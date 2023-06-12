@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/widgets.dart';
 
 import '../photo_view.dart';
@@ -32,6 +34,8 @@ class ImageWrapper extends StatefulWidget {
     required this.disableGestures,
     required this.errorBuilder,
     required this.enablePanAlways,
+    this.onScaleUpdate,
+    this.onScaleStart,
   }) : super(key: key);
 
   final ImageProvider imageProvider;
@@ -58,6 +62,8 @@ class ImageWrapper extends StatefulWidget {
   final FilterQuality? filterQuality;
   final bool? disableGestures;
   final bool? enablePanAlways;
+  final Function(ScaleUpdateDetails details)? onScaleUpdate;
+  final Function(ScaleStartDetails details)? onScaleStart;
 
   @override
   _ImageWrapperState createState() => _ImageWrapperState();
@@ -198,6 +204,8 @@ class _ImageWrapperState extends State<ImageWrapper> {
       filterQuality: widget.filterQuality ?? FilterQuality.none,
       disableGestures: widget.disableGestures ?? false,
       enablePanAlways: widget.enablePanAlways ?? false,
+      onScaleUpdate: widget.onScaleUpdate,
+      onScaleStart: widget.onScaleStart,
     );
   }
 
@@ -248,6 +256,8 @@ class CustomChildWrapper extends StatelessWidget {
     required this.filterQuality,
     required this.disableGestures,
     required this.enablePanAlways,
+    this.onScaleUpdate,
+    this.onScaleStart,
   }) : super(key: key);
 
   final Widget? child;
@@ -275,6 +285,8 @@ class CustomChildWrapper extends StatelessWidget {
   final FilterQuality? filterQuality;
   final bool? disableGestures;
   final bool? enablePanAlways;
+  final Function(ScaleUpdateDetails details)? onScaleUpdate;
+  final Function(ScaleStartDetails details)? onScaleStart;
 
   @override
   Widget build(BuildContext context) {
@@ -304,6 +316,8 @@ class CustomChildWrapper extends StatelessWidget {
       filterQuality: filterQuality ?? FilterQuality.none,
       disableGestures: disableGestures ?? false,
       enablePanAlways: enablePanAlways ?? false,
+      onScaleUpdate: onScaleUpdate,
+      onScaleStart: onScaleStart,
     );
   }
 }

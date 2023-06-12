@@ -64,6 +64,7 @@ class HeroPhotoViewRouteWrapper extends StatelessWidget {
         minScale: minScale,
         maxScale: maxScale,
         heroAttributes: const PhotoViewHeroAttributes(tag: "someTag"),
+        onScaleUpdate: (details) {},
       ),
     );
   }

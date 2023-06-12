@@ -41,6 +41,8 @@ class PhotoViewCore extends StatefulWidget {
     required this.filterQuality,
     required this.disableGestures,
     required this.enablePanAlways,
+    this.onScaleUpdate,
+    this.onScaleStart,
   })  : customChild = null,
         super(key: key);
 
@@ -63,6 +65,8 @@ class PhotoViewCore extends StatefulWidget {
     required this.filterQuality,
     required this.disableGestures,
     required this.enablePanAlways,
+    this.onScaleUpdate,
+    this.onScaleStart,
   })  : imageProvider = null,
         gaplessPlayback = false,
         super(key: key);
@@ -79,7 +83,8 @@ class PhotoViewCore extends StatefulWidget {
   final ScaleBoundaries scaleBoundaries;
   final ScaleStateCycle scaleStateCycle;
   final Alignment basePosition;
-
+  final Function(ScaleUpdateDetails details)? onScaleUpdate;
+  final Function(ScaleStartDetails details)? onScaleStart;
   final PhotoViewImageTapUpCallback? onTapUp;
   final PhotoViewImageTapDownCallback? onTapDown;
   final PhotoViewImageScaleEndCallback? onScaleEnd;
@@ -135,6 +140,9 @@ class PhotoViewCoreState extends State<PhotoViewCore>
   }
 
   void onScaleStart(ScaleStartDetails details) {
+    if (widget.onScaleStart != null) {
+      widget.onScaleStart!(details);
+    }
     _rotationBefore = controller.rotation;
     _scaleBefore = scale;
     _normalizedPosition = details.focalPoint - controller.position;
@@ -146,7 +154,9 @@ class PhotoViewCoreState extends State<PhotoViewCore>
   void onScaleUpdate(ScaleUpdateDetails details) {
     final double newScale = _scaleBefore! * details.scale;
     final Offset delta = details.focalPoint - _normalizedPosition!;
-
+    if (widget.onScaleUpdate != null) {
+      widget.onScaleUpdate!(details);
+    }
     updateScaleStateFromNewScale(newScale);
 
     updateMultiple(

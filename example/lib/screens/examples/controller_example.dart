@@ -66,6 +66,7 @@ class _ControllerExampleState extends State<ControllerExample> {
                 initialScale: minScale * 1.5,
                 minScale: minScale,
                 maxScale: maxScale,
+                onScaleUpdate: (details) {},
               ),
             ),
             Positioned(

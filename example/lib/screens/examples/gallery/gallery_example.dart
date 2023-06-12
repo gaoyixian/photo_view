@@ -137,6 +137,7 @@ class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper> {
               pageController: widget.pageController,
               onPageChanged: onPageChanged,
               scrollDirection: widget.scrollDirection,
+              onScaleUpdate: (details) {},
             ),
             Container(
               padding: const EdgeInsets.all(20.0),

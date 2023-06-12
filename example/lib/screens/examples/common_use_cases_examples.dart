@@ -171,6 +171,7 @@ class OneTapWrapper extends StatelessWidget {
           },
           child: PhotoView(
             imageProvider: imageProvider,
+            onScaleUpdate: (details) {},
           ),
         ),
       ),
